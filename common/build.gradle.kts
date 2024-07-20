@@ -51,9 +51,9 @@ kotlin {
                 implementation(compose.materialIconsExtended)
 
                 //DI
-                implementation(libs.koin.core)
+                api(libs.koin.core)
 
-                api(project(":feature-sample")) //транзитивно передаю зависимость на common-фичу
+                api(project(":feature-sample")) //транзитивно передаю зависимость на фичу
             }
         }
 
