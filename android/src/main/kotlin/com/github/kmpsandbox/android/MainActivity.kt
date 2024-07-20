@@ -3,7 +3,7 @@ package com.github.kmpsandbox.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.github.kmpsandbox.SayHallo
+import com.github.kmpsandbox.ui.screen.RootScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -11,7 +11,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SayHallo()
+            RootScreen()
         }
     }
 }

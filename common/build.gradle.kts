@@ -40,7 +40,7 @@ kotlin {
     sourceSets {
         // указываем зависимости для source set`а commonMain.
         // эти зависимости станут доступны для всех таргетов, которые используют commonMain в качестве sourceSet.
-        commonMain {
+        val commonMain by getting { //by getting используется для создания переменной, которую можно использовать в dependsOn платформенных таргетов.
             dependencies {
                 //Compose станет общим для всех таргетов, которые используют commonMain в качестве sourceSet.
                 implementation(compose.foundation)
@@ -59,12 +59,16 @@ kotlin {
          * Например, jvmMain source set компилируется только для jvm таргета.
          */
         jvmMain {
+            dependsOn(commonMain)
             dependencies {
                 // api - делает зависимость транзитивной,
                 // т.е. доступ к этой зависимости будет у модуля, у которого есть зависимость на shared
                 // Данная зависимость предоставляет application{} и Window, в которых можно вызвать Compose UI.
                 api(compose.desktop.currentOs)
             }
+        }
+        androidMain {
+            dependsOn(commonMain)
         }
     }
 }
@@ -73,6 +77,10 @@ kotlin {
 android {
     namespace = "com.github.kmpsandbox"
     compileSdk = 34
+
+    defaultConfig {
+        minSdk = 24
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
