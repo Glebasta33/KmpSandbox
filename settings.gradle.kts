@@ -20,3 +20,4 @@ pluginManagement {
 include(":common")
 include(":desktop")
 include(":android")
+include(":feature-sample")

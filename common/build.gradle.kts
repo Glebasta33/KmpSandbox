@@ -49,6 +49,11 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.material3)
                 implementation(compose.materialIconsExtended)
+
+                //DI
+                implementation(libs.koin.core)
+
+                api(project(":feature-sample")) //транзитивно передаю зависимость на common-фичу
             }
         }
 
