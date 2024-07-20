@@ -1,0 +1,9 @@
+# Ignore Gradle build output directory
+.gradle
+build
+/build
+*.iml
+/.idea
+
+local.properties
+.kotlin
