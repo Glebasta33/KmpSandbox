@@ -1,17 +1,44 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.jetbrainsCompose)
+    alias(libs.plugins.android.library) //плагин android-библиотеки
 }
 
+/**
+ * ## Targets.
+ * Таргеты задают платформы, для которых будет компилиться common-code.
+ * Kotlin target - это идентификатор, описывающий цель компиляции.
+ * Таргеты - это "инструкции" для компилятора, описывающие формат конечных бинарников для платформ.
+ *
+ * Внутри плагина kotlin перечисляется набор таргетов-платформ приложения.
+ * Common code будет скомпилирован отдельно для каждого таргета.
+ *
+ * ## Source sets.
+ * Kotlin source set - это набор исходных файлов, зависимостей.
+ * Это основной способ передачи кода в мультиплатформенном проекте.
+ * Каждый source set:
+ * - Имеет уникальное имя.
+ * - Содержит файлы кода или ресурсов, обычно хранящихся в директории с именем source set`а.
+ * - Задаёт набор таргетов, для которых будет компилироваться код из данного source set`а.
+ * - Задаёт собственные dependencies и compiler options.
+ *
+ * commonMain - один из предустановленный source set`ов, который компилируется во все указанные таргеты.
+ * Source sets - это директории внутри src.
+ * Platform-specific source sets предоставляют зависимости для конкретных платформенных таргетов,
+ * код из данного source set компилируется только для соответсвующего платформенного таргета.
+ * Внутри Platform-specific source sets можно использовать код из commonMain (но не наоборот!).
+ *
+ * ## Intermediate source sets.
+ * Intermediate source sets - это нечто среднее между commonMain и платформенным таргетом (например, androidMain, jmvMain).
+ * Это common-код специфичный для конкретных платформ
+ */
 kotlin {
-    jvm()
+    jvm() // 1 таргет jvm для desktop-платформы
+    androidTarget() // 2 таргет для android-платформы
 
-    // в sourceSets указываются зависимости для таргетов в текущем модуле
-    // sourceSet - источник зависимостей.
-    // таргет - место, где будут использоваться зависимости.
-    // в sourceSets можно указать разные зависимости для конкретный таргетов.
+    // в sourceSets можно указать зависимости для source set`ов.
     sourceSets {
-        // указываем зависимости для таргета commonMain.
+        // указываем зависимости для source set`а commonMain.
         // эти зависимости станут доступны для всех таргетов, которые используют commonMain в качестве sourceSet.
         commonMain {
             dependencies {
@@ -25,6 +52,12 @@ kotlin {
             }
         }
 
+        /**
+         * В то время как common-код может компилироваться во все платформенные таргеты,
+         * существуют platform-specific APIs, которые нельзя использовать в common-source set.
+         * Platform-specific source sets предоставляют зависимости для конкретных платформенных таргетов.
+         * Например, jvmMain source set компилируется только для jvm таргета.
+         */
         jvmMain {
             dependencies {
                 // api - делает зависимость транзитивной,
@@ -33,5 +66,16 @@ kotlin {
                 api(compose.desktop.currentOs)
             }
         }
+    }
+}
+
+// Android-плагин:
+android {
+    namespace = "com.github.kmpsandbox"
+    compileSdk = 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }

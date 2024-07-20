@@ -8,5 +8,15 @@ dependencyResolutionManagement {
     }
 }
 
+// Для Android
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
 include(":common")
 include(":desktop")
+include(":android")
