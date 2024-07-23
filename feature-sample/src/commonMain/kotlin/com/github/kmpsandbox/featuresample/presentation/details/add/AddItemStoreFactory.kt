@@ -4,18 +4,19 @@ import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.github.kmpsandbox.featuresample.data.ItemsRepository
 import com.github.kmpsandbox.featuresample.domain.usecase.AddItemUseCase
 import com.github.kmpsandbox.featuresample.model.domain.Item
-import com.github.kmpsandbox.featuresample.presentation.details.add.AddItemStore.*
+import com.github.kmpsandbox.featuresample.presentation.details.add.AddItemStore.Intent
+import com.github.kmpsandbox.featuresample.presentation.details.add.AddItemStore.Label
+import com.github.kmpsandbox.featuresample.presentation.details.add.AddItemStore.State
 
 /**
  * Фабрика для создания реализации интерфейса стора.
  * StoreFactory из библиотеки mvikotlin генерит реализацию стора.
  */
 class AddItemStoreFactory(
-    private val storeFactory: DefaultStoreFactory = DefaultStoreFactory(),
-    private val addItemUseCase: AddItemUseCase = AddItemUseCase(ItemsRepository)
+    private val storeFactory: DefaultStoreFactory,
+    private val addItemUseCase: AddItemUseCase
 ) {
 
     fun create(): AddItemStore =

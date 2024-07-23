@@ -5,11 +5,11 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
-import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.github.kmpsandbox.featuresample.data.ItemsRepository
 import com.github.kmpsandbox.featuresample.domain.usecase.GetItemsUseCase
 import com.github.kmpsandbox.featuresample.model.domain.Item
-import com.github.kmpsandbox.featuresample.presentation.list.ListStore.*
+import com.github.kmpsandbox.featuresample.presentation.list.ListStore.Intent
+import com.github.kmpsandbox.featuresample.presentation.list.ListStore.Label
+import com.github.kmpsandbox.featuresample.presentation.list.ListStore.State
 import kotlinx.coroutines.launch
 
 interface ListStore : Store<Intent, State, Label> {
@@ -33,8 +33,8 @@ interface ListStore : Store<Intent, State, Label> {
 }
 
 class ListStoreFactory(
-    private val storeFactory: StoreFactory = DefaultStoreFactory(),
-    private val getItemsUseCase: GetItemsUseCase = GetItemsUseCase(ItemsRepository)
+    private val storeFactory: StoreFactory,
+    private val getItemsUseCase: GetItemsUseCase
 ) {
 
     fun create(): ListStore =

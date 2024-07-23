@@ -4,8 +4,6 @@ import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
-import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.github.kmpsandbox.featuresample.data.ItemsRepository
 import com.github.kmpsandbox.featuresample.domain.usecase.EditItemUseCase
 import com.github.kmpsandbox.featuresample.model.domain.Item
 
@@ -13,10 +11,10 @@ import com.github.kmpsandbox.featuresample.model.domain.Item
  * Фабрика для создания реализации интерфейса стора.
  * StoreFactory из библиотеки mvikotlin генерит реализацию стора.
  */
-class EditItemStoreFactory {
-
-    private val storeFactory: StoreFactory = DefaultStoreFactory()
-    private val editItemUseCase = EditItemUseCase(ItemsRepository)
+class EditItemStoreFactory(
+    private val storeFactory: StoreFactory,
+    private val editItemUseCase: EditItemUseCase
+) {
 
     fun create(contact: Item): EditItemStore = object : EditItemStore,
         Store<EditItemStore.Intent, EditItemStore.State, EditItemStore.Label> by storeFactory.create(

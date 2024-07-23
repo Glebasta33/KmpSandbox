@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import com.github.kmpsandbox.featuresample.di.getKoinInstance
 import com.github.kmpsandbox.featuresample.model.domain.Item
 import com.github.kmpsandbox.featuresample.utils.componentScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,7 +18,7 @@ class ListComponentImpl(
 ) : ListComponent, ComponentContext by componentContext {
 
     private val store: ListStore = instanceKeeper.getStore {
-        val storeFactory = ListStoreFactory()
+        val storeFactory = ListStoreFactory(getKoinInstance(), getKoinInstance())
         storeFactory.create()
     }
 

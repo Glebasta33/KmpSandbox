@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import com.github.kmpsandbox.featuresample.di.getKoinInstance
 import com.github.kmpsandbox.featuresample.model.domain.Item
 import com.github.kmpsandbox.featuresample.utils.componentScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,7 +18,7 @@ class EditItemComponentImpl(
 ) : EditItemComponent, ComponentContext by componentContext {
 
     private val store: EditItemStore = instanceKeeper.getStore {
-        val storeFactory = EditItemStoreFactory()
+        val storeFactory = EditItemStoreFactory(getKoinInstance(), getKoinInstance())
         storeFactory.create(item)
     }
 

@@ -4,6 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.stateFlow
+import com.github.kmpsandbox.featuresample.di.getKoinInstance
 import com.github.kmpsandbox.featuresample.utils.componentScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.StateFlow
@@ -15,14 +16,14 @@ class AddItemComponentImpl(
 ) : AddItemComponent, ComponentContext by componentContext {
 
     private val store: AddItemStore = instanceKeeper.getStore {
-        val storeFactory = AddItemStoreFactory()
+        val storeFactory = AddItemStoreFactory(getKoinInstance(), getKoinInstance())
         storeFactory.create()
     }
 
     init {
         componentScope.launch {
             store.labels.collect {
-                when(it) {
+                when (it) {
                     AddItemStore.Label.ItemSaved -> onItemSaved()
                 }
             }

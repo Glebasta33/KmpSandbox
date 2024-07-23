@@ -1,6 +1,7 @@
 package com.github.kmpsandbox.di
 
 import com.github.kmpsandbox.featuresample.di.FeatureSampleModule
+import com.github.kmpsandbox.featuresample.di.ItemsModule
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
@@ -16,6 +17,7 @@ inline fun <reified T> getKoinInstance(qualifier: Qualifier? = null): T {
 fun initKoin() = startKoin {
     modules(
         CommonModules.deviceInfo,
-        FeatureSampleModule.repository
+        FeatureSampleModule.repository,
+        ItemsModule.items
     )
 }
