@@ -4,9 +4,10 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
-import com.github.kmpsandbox.featuresample.domain.Item
+import com.github.kmpsandbox.featuresample.model.domain.Item
 import com.github.kmpsandbox.featuresample.presentation.details.edit.EditItemComponentImpl
 import com.github.kmpsandbox.featuresample.presentation.list.ListComponentImpl
 import kotlinx.serialization.Serializable
@@ -44,7 +45,7 @@ class RootComponentImpl(
                 EditItemComponentImpl(
                     item = config.item,
                     onContactSaved = {
-//                        navigation.pop()
+                        navigation.pop()
                     },
                     componentContext = componentContext
                 )

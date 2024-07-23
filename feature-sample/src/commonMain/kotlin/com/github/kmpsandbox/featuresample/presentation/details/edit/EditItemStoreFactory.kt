@@ -5,7 +5,9 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.github.kmpsandbox.featuresample.domain.Item
+import com.github.kmpsandbox.featuresample.data.ItemsRepository
+import com.github.kmpsandbox.featuresample.domain.usecase.EditItemUseCase
+import com.github.kmpsandbox.featuresample.model.domain.Item
 
 /**
  * Фабрика для создания реализации интерфейса стора.
@@ -14,11 +16,11 @@ import com.github.kmpsandbox.featuresample.domain.Item
 class EditItemStoreFactory {
 
     private val storeFactory: StoreFactory = DefaultStoreFactory()
-//    private val editContactUseCase: EditContactUseCase = EditContactUseCase(RepositoryImpl)
+    private val editItemUseCase = EditItemUseCase(ItemsRepository)
 
     fun create(contact: Item): EditItemStore = object : EditItemStore,
         Store<EditItemStore.Intent, EditItemStore.State, EditItemStore.Label> by storeFactory.create(
-            name = "EditContactStore",
+            name = "EditItemStore",
             autoInit = true,
             initialState = EditItemStore.State(
                 id = contact.id,
@@ -51,16 +53,15 @@ class EditItemStoreFactory {
                     dispatch(Msg.ChangeItemText(username = intent.text))
                 }
 
-//                EditContactStore.Intent.SaveContact -> {
-//                    val state = getState()
-//                    val contact = Contact(
-//                        id = state.id,
-//                        username = state.username,
-//                        phone = state.phone
-//                    )
-//                    editContactUseCase(contact)
-//                    publish(EditContactStore.Label.OnContactSaved)
-//                }
+                EditItemStore.Intent.SaveItem -> {
+                    val state = getState()
+                    val item = Item(
+                        id = state.id,
+                        text = state.text,
+                    )
+                    editItemUseCase(item)
+                    publish(EditItemStore.Label.OnItemSaved)
+                }
             }
         }
 

@@ -1,12 +1,12 @@
 package com.github.kmpsandbox.featuresample.data
 
-import com.github.kmpsandbox.featuresample.domain.Item
+import com.github.kmpsandbox.featuresample.model.domain.Item
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
-object Repository {
+object ItemsRepository {
 
 
     private val _items = mutableListOf(

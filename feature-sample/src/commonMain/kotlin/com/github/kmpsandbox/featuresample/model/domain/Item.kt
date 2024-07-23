@@ -1,4 +1,4 @@
-package com.github.kmpsandbox.featuresample.domain
+package com.github.kmpsandbox.featuresample.model.domain
 
 import kotlinx.serialization.Serializable
 

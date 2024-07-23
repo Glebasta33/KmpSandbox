@@ -8,5 +8,5 @@ interface EditItemComponent {
 
     fun onItemTextChanged(text: String)
 
-//    fun onSaveContactClicked()
+    fun onSaveContactClicked()
 }

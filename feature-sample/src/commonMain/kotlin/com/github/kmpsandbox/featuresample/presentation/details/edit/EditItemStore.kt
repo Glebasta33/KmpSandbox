@@ -11,7 +11,7 @@ interface EditItemStore : Store<EditItemStore.Intent, EditItemStore.State, EditI
 
     sealed interface Intent {
         data class ChangeText(val text: String) : Intent
-//        data object SaveContact : Intent
+        data object SaveItem : Intent
     }
 
     sealed interface Label {
