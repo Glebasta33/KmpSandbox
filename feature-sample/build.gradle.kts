@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.android.library) //плагин android-библиотеки
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
@@ -19,6 +20,17 @@ kotlin {
                 implementation(compose.materialIconsExtended)
 
                 implementation(libs.koin.core)
+
+                //MVI
+                implementation(libs.mvikotlin.core)
+                implementation(libs.mvikotlin.main)
+                implementation(libs.mvikotlin.coroutines)
+
+                //Navigation
+                implementation(libs.decompose.core)
+                implementation(libs.decompose.compose)
+
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
             }
         }
 

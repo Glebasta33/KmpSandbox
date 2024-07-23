@@ -6,21 +6,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.github.kmpsandbox.di.getKoinInstance
-import com.github.kmpsandbox.featuresample.mock.FeatureRepository
-import com.github.kmpsandbox.featuresample.ui.FeatureScreen
-import com.github.kmpsandbox.ui.deviceinfo.DeviceInfoCell
+import com.github.kmpsandbox.featuresample.presentation.root.RootComponent
+import com.github.kmpsandbox.featuresample.presentation.root.RootContent
 
 @Composable
-fun RootScreen() {
+fun RootScreen(rootComponent: RootComponent) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        DeviceInfoCell(getKoinInstance())
-        val featureRepository: FeatureRepository = getKoinInstance()
-        FeatureScreen(featureRepository.getData())
+//        DeviceInfoCell(getKoinInstance())
+//        val featureRepository: FeatureRepository = getKoinInstance()
+//        FeatureScreen(featureRepository.getData())
+
+        RootContent(rootComponent)
     }
 
 }

@@ -53,6 +53,17 @@ kotlin {
                 //DI
                 api(libs.koin.core)
 
+                //MVI
+                api(libs.mvikotlin.core)
+                api(libs.mvikotlin.main)
+                api(libs.mvikotlin.coroutines)
+
+                //Navigation
+                api(libs.decompose.core)
+                api(libs.decompose.compose)
+
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+
                 api(project(":feature-sample")) //транзитивно передаю зависимость на фичу
             }
         }

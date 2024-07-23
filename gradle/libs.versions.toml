@@ -8,6 +8,10 @@ settings = "1.0.0"
 koin = "3.5.0"
 kotlinx-datetime = "0.4.0"
 sqldelight = "2.0.0"
+mvikotlin = "3.2.1"
+decompose = "3.1.0"
+badoo-reaktive = "2.1.0"
+coroutines = "1.8.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -21,6 +25,14 @@ sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-ex
 sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 sqldelight-desktop-driver = { module = "app.cash.sqldelight:sqlite-driver", version.ref = "sqldelight" }
+mvikotlin-core = { group = "com.arkivanov.mvikotlin", name = "mvikotlin", version.ref = "mvikotlin" }
+mvikotlin-main = { group = "com.arkivanov.mvikotlin", name = "mvikotlin-main", version.ref = "mvikotlin" }
+mvikotlin-coroutines = { group = "com.arkivanov.mvikotlin", name = "mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
+decompose-core = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
+decompose-compose = { group = "com.arkivanov.decompose", name = "extensions-compose", version.ref = "decompose" }
+badoo-reaktive = { module = "com.badoo.reaktive:reaktive", version.ref = "badoo-reaktive" }
+badoo-reaktive-coroutines-interop = { module = "com.badoo.reaktive:coroutines-interop", version.ref = "badoo-reaktive" }
+coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "coroutines" }
 
 [plugins]
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose" }
@@ -30,3 +42,4 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 moko-res = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-res" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version = "1.5.0" }

@@ -15,7 +15,7 @@ inline fun <reified T> getKoinInstance(qualifier: Qualifier? = null): T {
 
 fun initKoin() = startKoin {
     modules(
-        CoreModule.deviceInfo,
+        CommonModules.deviceInfo,
         FeatureSampleModule.repository
     )
 }

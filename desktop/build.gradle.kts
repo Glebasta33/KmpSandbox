@@ -12,6 +12,9 @@ kotlin {
         getByName("desktopMain") {// название таргета (текущей платформы), к которой мы подключаем модуль common в качестве sourceSet (а следовательно и все его sourceSet`ы).
             dependencies { // подключаем зависимость на common-код
                 implementation(project(":common"))
+                implementation(libs.badoo.reaktive)
+                implementation(libs.badoo.reaktive.coroutines.interop)
+                implementation(libs.coroutines.swing)
             }
         }
     }
