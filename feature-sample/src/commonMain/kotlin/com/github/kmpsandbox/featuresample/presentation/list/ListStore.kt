@@ -7,6 +7,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.github.kmpsandbox.featuresample.data.ItemsRepository
+import com.github.kmpsandbox.featuresample.domain.usecase.GetItemsUseCase
 import com.github.kmpsandbox.featuresample.model.domain.Item
 import com.github.kmpsandbox.featuresample.presentation.list.ListStore.*
 import kotlinx.coroutines.launch
@@ -33,7 +34,7 @@ interface ListStore : Store<Intent, State, Label> {
 
 class ListStoreFactory(
     private val storeFactory: StoreFactory = DefaultStoreFactory(),
-    private val repository: ItemsRepository = ItemsRepository
+    private val getItemsUseCase: GetItemsUseCase = GetItemsUseCase(ItemsRepository)
 ) {
 
     fun create(): ListStore =
@@ -56,7 +57,7 @@ class ListStoreFactory(
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
         override fun invoke() {
             scope.launch {
-                repository.getItems().collect { items ->
+                getItemsUseCase().collect { items ->
                     dispatch(Action.ItemsLoaded(items))
                 }
             }

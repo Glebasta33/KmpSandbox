@@ -14,12 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.unit.dp
+import com.github.kmpsandbox.featuresample.presentation.details.add.AddItemComponent
 import com.github.kmpsandbox.featuresample.presentation.details.edit.EditItemComponent
 
 @Composable
-fun EditItem(
+fun EditItemContent(
     component: EditItemComponent
 ) {
     val model by component.model.collectAsState()
@@ -42,6 +42,36 @@ fun EditItem(
         Button(
             modifier = Modifier.fillMaxWidth(),
             onClick = { component.onSaveContactClicked() }
+        ) {
+            Text(text = "Save")
+        }
+    }
+}
+
+@Composable
+fun AddItemContent(
+    component: AddItemComponent
+) {
+    val model by component.model.collectAsState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+            .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        TextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = model.text,
+            placeholder = {
+                Text(text = "Username:")
+            },
+            onValueChange = { component.onItemTextChanged(it) }
+        )
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = { component.onSaveButtonClick() }
         ) {
             Text(text = "Save")
         }

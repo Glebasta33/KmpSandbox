@@ -8,6 +8,7 @@ import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.github.kmpsandbox.featuresample.model.domain.Item
+import com.github.kmpsandbox.featuresample.presentation.details.add.AddItemComponentImpl
 import com.github.kmpsandbox.featuresample.presentation.details.edit.EditItemComponentImpl
 import com.github.kmpsandbox.featuresample.presentation.list.ListComponentImpl
 import kotlinx.serialization.Serializable
@@ -31,7 +32,7 @@ class RootComponentImpl(
             Config.ItemList -> RootComponent.Child.ContactList(
                 ListComponentImpl(
                     onAddItemClick = {
-//                        navigation.push(Config.Creation)
+                        navigation.push(Config.Creation)
                     },
                     onItemClick = { item ->
                         navigation.push(Config.Details(item))
@@ -50,16 +51,16 @@ class RootComponentImpl(
                     componentContext = componentContext
                 )
             )
-//
-//
-//            Config.Creation -> Child.Creation(
-//                CreationComponentImpl(
-//                    onSaved = {
-//                        navigation.pop()
-//                    },
-//                    componentContext = componentContext
-//                )
-//            )
+
+
+            Config.Creation -> RootComponent.Child.Creation(
+                AddItemComponentImpl(
+                    onItemSaved = {
+                        navigation.pop()
+                    },
+                    componentContext = componentContext
+                )
+            )
 
         }
 
@@ -71,7 +72,7 @@ class RootComponentImpl(
         @Serializable
         data class Details(val item: Item) : Config
 
-//        @Parcelize
-//        data object Creation : Config
+        @Serializable
+        data object Creation : Config
     }
 }
